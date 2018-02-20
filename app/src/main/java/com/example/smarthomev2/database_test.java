@@ -89,7 +89,7 @@ public class database_test extends AppCompatActivity {
             Statement stmt = null;
 
             try {
-                Class.forName(JDBC_DRIVER);
+                Class.forName(JDBC_DRIVER); //
                 conn = DriverManager.getConnection(DB_URL, DB_strings.USERNAME, DB_strings.PASSWORD);
 
                 stmt = conn.createStatement();
