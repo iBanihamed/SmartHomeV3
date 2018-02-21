@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/appName"
+        android:paddingTop = "20sp"
+        android:gravity = "center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SmartHome"
+        android:textSize="30sp"
+        />
+    <EditText
+        android:id="@+id/userUsername"
+        android:layout_width="150sp"
+        android:gravity = "center"
+        android:layout_height="wrap_content"
+        android:layout_below = "@+id/appName"
+        android:layout_centerHorizontal="true"
+        android:hint = "Username"
+        android:layout_margin="10sp"
+        />
+    <EditText
+        android:id="@+id/userPassword"
+        android:layout_width="150sp"
+        android:gravity = "center"
+        android:layout_height="wrap_content"
+        android:layout_below = "@+id/userUsername"
+        android:layout_centerHorizontal="true"
+        android:hint = "Password"
+        android:layout_margin="10sp"
+        />
+
+    <Button
+        android:id="@+id/signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:layout_below ="@+id/userPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="30sp"
+
+        />
+
+    <Button
+        android:id="@+id/signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:layout_below ="@+id/signIn"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="120sp"
+        />
+</RelativeLayout>
