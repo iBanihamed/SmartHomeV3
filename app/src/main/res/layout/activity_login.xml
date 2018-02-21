@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <!--  sdgsg-->
-
+<!-- slfja;sljdfa;l -->
     <TextView
         android:id="@+id/appName"
         android:paddingTop = "20sp"
