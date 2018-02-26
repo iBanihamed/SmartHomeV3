@@ -32,6 +32,7 @@ public class itemAdapterDB extends BaseAdapter {
         map = m;
         device = new ArrayList<String>(map.keySet());
         powerFactor = new ArrayList<Double>(map.values());
+        //Still need to figure out how to send data to turn off and on device
     }
 
     @Override

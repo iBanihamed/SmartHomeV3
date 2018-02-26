@@ -20,7 +20,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 
 //import static ismael.banihamed.my.a353.csun.edu.myfirstapp.R.id.progressTextView;
 
@@ -28,9 +30,16 @@ public class database_test extends AppCompatActivity {
 
     itemAdapterDB itemAdapter;
     Context thisContext;
-    ListView myListView;
+    public static ListView myListView;
     TextView progressTextView;
    // TextView timeTextView;
+    //int variables for 2D arrays of data;
+    int i = 0;
+    int j = 0;
+
+    public static int pos;
+    public static String[][] devicesArray = new String[10][10];
+    public static Double[][] powerFactorArray = new Double[10][10];
     Map<String, Double> devicesMap = new LinkedHashMap<String, Double>();
 
     public database_test() throws SQLException {
@@ -52,6 +61,15 @@ public class database_test extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v) {
+                //traverse through array to save previous data;
+                i = 0;
+                if(j < 9) {
+                    j++;
+                } else {
+                    j = 0;
+                }
+
+                //execute getting data from database
                 GetData retrieveData = new GetData();
                 retrieveData.execute("");
             }
@@ -59,9 +77,10 @@ public class database_test extends AppCompatActivity {
         //Code in progress*********************
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> parent, View view, int r, long d) {
+                pos = r;
                 Intent moreInfoActivity = new Intent(getApplicationContext(), moreInfoActivity.class);
-                moreInfoActivity.putExtra("com.example.smarthomev2.ITEM_INDEX", i);
+                moreInfoActivity.putExtra("com.example.smarthomev2.ITEM_INDEX", r);
                 startActivity(moreInfoActivity);
 
             }
@@ -70,7 +89,7 @@ public class database_test extends AppCompatActivity {
         //**************************************
     }
 
-    private class GetData extends AsyncTask<String, String, String> {
+    class GetData extends AsyncTask<String, String, String> {
 
         String msg = "";
         String timeText;
@@ -102,12 +121,18 @@ public class database_test extends AppCompatActivity {
 
                 while (rs.next()) {
                     String device = rs.getString("device");
-                    //int power = rs.getInt("power");
+                    devicesArray[i][j] = rs.getString("device");
 
                     double powerFactor = rs.getDouble("powerfactor");
-                    //     double pricing = rs.getFloat("price");
+                    powerFactorArray[i][j] = rs.getDouble("powerfactor");
 
-                    devicesMap.put(device, powerFactor);
+                    //double pricing = rs.getFloat("price");
+                    //int power = rs.getInt("power");
+
+                    //put the data in the map to display
+                    //devicesMap.put(device, powerFactor);
+                    devicesMap.put(devicesArray[i][j],powerFactorArray[i][j]);
+                    i++;
                 }
                 //Time timeStamp = rs.getTime("time");
                 msg = "Process complete";
