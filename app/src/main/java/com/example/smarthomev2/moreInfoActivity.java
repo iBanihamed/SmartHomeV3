@@ -21,11 +21,33 @@ public class moreInfoActivity extends AppCompatActivity {
 
         int position = pos;
         //going to have to use queue to implement
+        double[] pfArray = new double[0];
+        int i = 0;
+        int j = 1;
+        Integer xi;
+        Double yi;
+
+        DataPoint[] values = new DataPoint[9];
+        while(j <= 9) {
+            xi = i;
+            if(powerFactorArray[pos][j] != null){
+                yi = powerFactorArray[pos][j];
+            } else {
+                yi = 0.0;
+            }
+            values[i] = new DataPoint(xi, yi);
+            i++;
+            j++;
+        }
 
         GraphView graph = (GraphView) findViewById(R.id.powerGraph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-            new DataPoint(0,powerFactorArray[pos][1])
-           /* new DataPoint(1, powerFactorArray[pos][2]), //cant graph the rest of the values because they null button needs to be clicked on more
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(values);
+        graph.addSeries(series);
+
+
+       /* LineGraphSeries<DataPoint> series  = new LineGraphSeries<>(new DataPoint[] {
+            new DataPoint(0,powerFactorArray[pos][1]),
+            new DataPoint(1, powerFactorArray[pos][2]), //cant graph the rest of the values because they null button needs to be clicked on more
             new DataPoint(2, powerFactorArray[pos][3]),
             new DataPoint(3, powerFactorArray[pos][4]),
                 new DataPoint(4, powerFactorArray[pos][5]),
@@ -33,10 +55,11 @@ public class moreInfoActivity extends AppCompatActivity {
                 new DataPoint(1, powerFactorArray[pos][7]),
                 new DataPoint(1, powerFactorArray[pos][8]),
                 new DataPoint(1, powerFactorArray[pos][9]),
-                new DataPoint(1, powerFactorArray[pos][10]) */
+                new DataPoint(1, powerFactorArray[pos][10])
         });
-        graph.addSeries(series);
+        graph.addSeries(series); */
     }
-
-
 }
+
+
+
