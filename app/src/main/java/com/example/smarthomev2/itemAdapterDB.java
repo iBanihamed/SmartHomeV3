@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class itemAdapterDB extends BaseAdapter {
         map = m;
         device = new ArrayList<String>(map.keySet());
         powerFactor = new ArrayList<Double>(map.values());
+        //Still need to figure out how to send data to turn off and on device
     }
 
     @Override
@@ -68,20 +70,26 @@ public class itemAdapterDB extends BaseAdapter {
     private void setRowColor(View v, Double powerFactor) {
         int level = getLevel(powerFactor);
         switch (level) {
-            case 1: v.setBackgroundResource(R.color.colorDarkGreen);
+            case 1:
+                v.setBackgroundResource(R.color.colorDarkGreen);
                 break;
-            case 2: v.setBackgroundResource(R.color.colorLimeGreen);
+            case 2:
+                v.setBackgroundResource(R.color.colorLimeGreen);
                 break;
-            case 3: v.setBackgroundResource(R.color.colorYellow);
+            case 3:
+                v.setBackgroundResource(R.color.colorYellow);
                 break;
-            case 4: v.setBackgroundResource(R.color.colorOrange);
+            case 4:
+                v.setBackgroundResource(R.color.colorOrange);
                 break;
-            case 5: v.setBackgroundResource(R.color.colorRed);
+            case 5:
+                v.setBackgroundResource(R.color.colorRed);
                 break;
             // case 12: v.setBackgroundColor(Color.rgb(0,100,0));
             //   break;
             //white default
-            default: v.setBackgroundResource(R.color.colorPrimary);
+            default:
+                v.setBackgroundResource(R.color.colorPrimary);
                 break;
         }
     }

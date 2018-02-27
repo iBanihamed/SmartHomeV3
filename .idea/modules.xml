@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SmartHomeV2-master.iml" filepath="$PROJECT_DIR$/SmartHomeV2-master.iml" />
+      <module fileurl="file://C:\Users\Andrew\Desktop\Android_Projects\SmartHomeV3\SmartHomeV2-master.iml" filepath="C:\Users\Andrew\Desktop\Android_Projects\SmartHomeV3\SmartHomeV2-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SmartHomeV3.iml" filepath="$PROJECT_DIR$/.idea/SmartHomeV3.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Andrew\Desktop\Android_Projects\SmartHomeV3\app\app.iml" filepath="C:\Users\Andrew\Desktop\Android_Projects\SmartHomeV3\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mysql-connector-java-3.0.17-ga-bin/mysql-connector-java-3.0.17-ga-bin.iml" filepath="$PROJECT_DIR$/mysql-connector-java-3.0.17-ga-bin/mysql-connector-java-3.0.17-ga-bin.iml" />
+      <module fileurl="file://C:\Users\Andrew\Desktop\Android_Projects\SmartHomeV3\mysql-connector-java-3.0.17-ga-bin\mysql-connector-java-3.0.17-ga-bin.iml" filepath="C:\Users\Andrew\Desktop\Android_Projects\SmartHomeV3\mysql-connector-java-3.0.17-ga-bin\mysql-connector-java-3.0.17-ga-bin.iml" />
     </modules>
   </component>
 </project>
