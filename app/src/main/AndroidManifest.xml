@@ -26,7 +26,8 @@
         <activity android:name=".settings" />
         <activity android:name=".database_test" />
         <activity android:name=".moreInfoActivity" />
-
+        <activity android:name=".LoginPage">
+        </activity>
     </application>
 
 </manifest>
