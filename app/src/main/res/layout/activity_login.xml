@@ -64,5 +64,5 @@
         android:layout_below="@+id/signIn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
-        android:text="Does this work?" />
+        android:text="" />
 </RelativeLayout>
