@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         Button settingsButton = (Button) findViewById(R.id.info);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent settingsIntent = new Intent(getApplicationContext(), settings.class);
+                Intent loginIntent = new Intent(getApplicationContext(), LoginPage.class);
 
-                startActivity(settingsIntent);
+                startActivity(loginIntent);
             }
         });
 

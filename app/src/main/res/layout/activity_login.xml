@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--  sdgsgrqwrc -->
-
+    <!--  sdgsg-->
+    <!-- slfja;sljdfa;l -->
     <TextView
         android:id="@+id/appName"
         android:paddingTop = "20sp"
@@ -43,6 +43,7 @@
         android:layout_below ="@+id/userPassword"
         android:layout_centerHorizontal="true"
         android:layout_margin="30sp"
+        android:onClick="signInAttempt"
 
         />
 
@@ -55,4 +56,13 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="120sp"
         />
+
+    <TextView
+        android:id="@+id/sampleMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signIn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:text="" />
 </RelativeLayout>
