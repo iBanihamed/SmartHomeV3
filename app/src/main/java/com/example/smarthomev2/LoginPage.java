@@ -15,7 +15,9 @@ import java.sql.Statement;
 
 import android.os.AsyncTask;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.smarthomev2.database_test.GetData.DB_URL;
 import static com.example.smarthomev2.database_test.GetData.JDBC_DRIVER;
@@ -28,11 +30,10 @@ import static com.example.smarthomev2.database_test.GetData.JDBC_DRIVER;
 
 public class LoginPage extends AppCompatActivity {
 
-    Boolean isSuccess;
     //Declare layout functionalities
     Button login;
     EditText username, password;
-
+    ProgressBar progressBar;
     //Connection variables
     Connection con;
 
@@ -44,7 +45,9 @@ public class LoginPage extends AppCompatActivity {
         login = (Button) findViewById(R.id.signIn);
         username = (EditText) findViewById(R.id.userUsername);
         password = (EditText) findViewById(R.id.userPassword);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        progressBar.setVisibility(View.GONE);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v) {
@@ -56,9 +59,10 @@ public class LoginPage extends AppCompatActivity {
 
     public class CheckLogin extends AsyncTask<String, String, String> {
         String msg = "";
+        Boolean isSuccess;
         @Override
         protected void onPreExecute() {
-
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -76,7 +80,7 @@ public class LoginPage extends AppCompatActivity {
                     if(con == null) {
                         msg = "Check Internet Access";
                     } else {
-                        String query = "select * from logindata where username = '" + userName + " and password = '" + passWord;
+                        String query = "select * from logindata where username = '" + userName + "' and password = '" + passWord + "';";
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         if(rs.next()) {
@@ -96,13 +100,16 @@ public class LoginPage extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            return msg;
+            return null;
         }
 
         @Override
-        protected void onPostExecute() {
+        protected void onPostExecute(String r) {
             progressBar.setVisibility(View.GONE);
-
+            Toast.makeText(LoginPage.this , r, Toast.LENGTH_SHORT).show();
+            if(isSuccess) {
+                Toast.makeText(LoginPage.this , "Login Successfull", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
