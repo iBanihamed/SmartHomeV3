@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.navigation,menu);
+        getMenuInflater().inflate(R.menu.menu_main,menu);
         // Place icon next to title name
         getSupportActionBar().setIcon(R.mipmap.ic_launcher_round);
         return true;

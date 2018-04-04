@@ -38,7 +38,17 @@ public class moreInfoActivity extends AppCompatActivity {
 
         GraphView graph = (GraphView) findViewById(R.id.powerGraph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(values);
+        graph.setTitle("Power Factor Over Last 10 Hours");
+        graph.getGridLabelRenderer().setHorizontalAxisTitle("Time");
+        graph.getGridLabelRenderer().setVerticalAxisTitle("Power Factor");
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(10);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(1.0);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(true);
         graph.addSeries(series);
+
     }
 
 
