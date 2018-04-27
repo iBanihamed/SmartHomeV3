@@ -17,7 +17,9 @@ import android.support.v7.app.AppCompatActivity;
  import android.widget.ProgressBar;
  import android.widget.TextView;
  import android.widget.Toast;
- import static com.example.smarthomev2.database_test.GetData.DB_URL;
+
+
+import static com.example.smarthomev2.database_test.GetData.DB_URL;
  import static com.example.smarthomev2.database_test.GetData.JDBC_DRIVER;
          
          
@@ -34,7 +36,7 @@ import android.support.v7.app.AppCompatActivity;
      ProgressBar progressBar;
      //Connection variables
      Connection con;
- 
+    static  Boolean LoginSuccess;
      @Override
      protected void onCreate(Bundle savedInstanceState){
          super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ import android.support.v7.app.AppCompatActivity;
  
      public class CheckLogin extends AsyncTask<String, String, String> {
          String msg = "";
-         Boolean isSuccess;
+         public Boolean isSuccess;
 
          @Override
          protected void onPreExecute() {
@@ -114,8 +116,11 @@ import android.support.v7.app.AppCompatActivity;
          protected void onPostExecute(String r) {
              progressBar.setVisibility(View.GONE);
              Toast.makeText(LoginPage.this , r, Toast.LENGTH_SHORT).show();
+             LoginSuccess = isSuccess;
              if(isSuccess) {
                  Toast.makeText(LoginPage.this , "Login Successful", Toast.LENGTH_LONG).show();
+             } else {
+                 Toast.makeText(LoginPage.this , "Login Failed", Toast.LENGTH_LONG).show();
              }
          }
      }
@@ -144,17 +149,12 @@ import android.support.v7.app.AppCompatActivity;
                      if(con == null) {
                          msg = "Check Internet Access";
                      } else {
-                         String query = "INSERT INTO logindata (username, password) VALUES ('" + userName + "', '" + passWord + "');";
+                         String update = "INSERT INTO logindata (username, password) VALUES ('" + userName + "', '" + passWord + "');";
                          Statement stmt = con.createStatement();
-                         ResultSet rs = stmt.executeQuery(query);
-                         if(rs.next()) {
-                             msg = "Sign Up Successful";
-                             isSuccess = true;
-                             con.close();
-                         } else {
-                             msg = "Invalid Credentials";
-                             isSuccess = false;
-                         }
+                         stmt.executeUpdate(update);
+                         msg = "Sign Up Success";
+                         isSuccess = true;
+                         con.close();
                      }
                  } catch (ClassNotFoundException e) {
                      msg = "Class not found";
@@ -171,8 +171,11 @@ import android.support.v7.app.AppCompatActivity;
          protected void onPostExecute(String r) {
              progressBar.setVisibility(View.GONE);
              Toast.makeText(LoginPage.this , r, Toast.LENGTH_SHORT).show();
+             LoginSuccess = isSuccess;
              if(isSuccess) {
-                 Toast.makeText(LoginPage.this , "Login Successful", Toast.LENGTH_LONG).show();
+                 Toast.makeText(LoginPage.this , "SignUp Successful", Toast.LENGTH_LONG).show();
+             } else {
+                 Toast.makeText(LoginPage.this , "SignUp Failed", Toast.LENGTH_LONG).show();
              }
          }
      }

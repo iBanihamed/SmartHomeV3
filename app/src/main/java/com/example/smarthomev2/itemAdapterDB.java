@@ -62,7 +62,6 @@ public class itemAdapterDB extends BaseAdapter {
 
         //stays comented out until we can query data from database
         setRowColor(v, powerFactor.get(position));
-
         return v;
     }
 

@@ -11,8 +11,11 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -36,6 +40,7 @@ public class database_test extends AppCompatActivity {
     static Context thisContext;
     public static ListView myListView;
     static TextView progressTextView;
+
     // TextView timeTextView;
     // int variables for 2D arrays of data;
     static int  i = 0;
@@ -61,6 +66,7 @@ public class database_test extends AppCompatActivity {
         Resources res = getResources();
         myListView = (ListView) findViewById(R.id.DBListView);
         progressTextView = (TextView) findViewById(R.id.progressTextView);
+
         //    timeTextView = (TextView) findViewById(R.id.timeTextView);
         thisContext = this;
         progressTextView.setText("");
@@ -71,9 +77,9 @@ public class database_test extends AppCompatActivity {
             public void onClick( View v) {
                 //Move to GetData
                 //traverse through array to save previous data;
-               // i = 0;
-               // if(j < 9) {
-               //     j++;
+                // i = 0;
+                // if(j < 9) {
+                //     j++;
                 //} else {
                 //    j = 0;
                 //}
@@ -100,7 +106,11 @@ public class database_test extends AppCompatActivity {
                 startActivity(moreInfoActivity);
             }
         });
+
+
+
     }
+
 
     static class GetData extends AsyncTask<String, String, String> {
         String msg = "";
@@ -188,11 +198,14 @@ public class database_test extends AppCompatActivity {
 
             progressTextView.setText(this.msg);
             //timeTextView.setText((String) this.timeText);
-            if (devicesMap.size() > 0) {
+                if (devicesMap.size() > 0) {
 
-                itemAdapter = new itemAdapterDB(thisContext, devicesMap);
-                myListView.setAdapter(itemAdapter);
-            }
+                    itemAdapter = new itemAdapterDB(thisContext, devicesMap);
+                    myListView.setAdapter(itemAdapter);
+                }
+
         }
     }
+
+
 }
