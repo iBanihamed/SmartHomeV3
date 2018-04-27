@@ -5,8 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +36,8 @@ public class itemAdapterDB extends BaseAdapter {
         map = m;
         device = new ArrayList<String>(map.keySet());
         powerFactor = new ArrayList<Double>(map.values());
+        onOff = new ArrayList<Boolean>(Arrays.asList(new Boolean[10]));
+        Collections.fill(onOff,Boolean.TRUE);
         //Still need to figure out how to send data to turn off and on device
     }
 
@@ -56,9 +62,12 @@ public class itemAdapterDB extends BaseAdapter {
         TextView devicesTextView = (TextView) v.findViewById(R.id.devicesTextView);
         TextView pfTextView = (TextView) v.findViewById(R.id.PFTextView);
         // TextView costTextView = (TextView) v.findViewById(R.id.costTextView);
-
+        CheckBox onOffCheckBox = (CheckBox) v.findViewById(R.id.outlet_checkBox);
         devicesTextView.setText(device.get(position).toString());
         pfTextView.setText(powerFactor.get(position).toString());
+        onOffCheckBox.setChecked(onOff.get(position));
+
+
 
         //stays comented out until we can query data from database
         setRowColor(v, powerFactor.get(position));

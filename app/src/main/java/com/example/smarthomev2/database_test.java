@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ public class database_test extends AppCompatActivity {
     static Context thisContext;
     public static ListView myListView;
     static TextView progressTextView;
+    static CheckBox checkBox;
     // TextView timeTextView;
     // int variables for 2D arrays of data;
     static int  i = 0;
@@ -44,6 +47,7 @@ public class database_test extends AppCompatActivity {
     public static int pos;
     public static String[][] devicesArray = new String[10][10];
     public static Double[][] powerFactorArray = new Double[10][10];
+    public static Boolean[][] onOffArray = new Boolean[10][10];
     static Map<String, Double> devicesMap = new LinkedHashMap<String, Double>();
 
     public database_test() throws SQLException {
@@ -64,8 +68,8 @@ public class database_test extends AppCompatActivity {
         //    timeTextView = (TextView) findViewById(R.id.timeTextView);
         thisContext = this;
         progressTextView.setText("");
-
         Button btn = (Button) findViewById(R.id.getDataButton);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v) {
