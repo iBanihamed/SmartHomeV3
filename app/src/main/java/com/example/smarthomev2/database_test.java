@@ -1,23 +1,18 @@
 package com.example.smarthomev2;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -29,26 +24,23 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
+//import static ismael.banihamed.my.a353.csun.edu.myfirstapp.R.id.progressTextView;
 
 public class database_test extends AppCompatActivity {
-    public AlarmManager alarmMgr;
-    public PendingIntent alarmIntent;
 
-    static itemAdapterDB itemAdapter;
-    static Context thisContext;
+    itemAdapterDB itemAdapter;
+    Context thisContext;
     public static ListView myListView;
-    static TextView progressTextView;
-    static CheckBox checkBox;
-    // TextView timeTextView;
-    // int variables for 2D arrays of data;
-    static int  i = 0;
-    static int  j = 0;
+    TextView progressTextView;
+   // TextView timeTextView;
+    //int variables for 2D arrays of data;
+    int i = 0;
+    int j = 0;
 
     public static int pos;
     public static String[][] devicesArray = new String[10][10];
     public static Double[][] powerFactorArray = new Double[10][10];
-    public static Boolean[][] onOffArray = new Boolean[10][10];
-    static Map<String, Double> devicesMap = new LinkedHashMap<String, Double>();
+    Map<String, Double> devicesMap = new LinkedHashMap<String, Double>();
 
     public database_test() throws SQLException {
     }
@@ -58,43 +50,31 @@ public class database_test extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database_test);
 
-        Intent intent = new Intent(database_test.this, AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(database_test.this, 0, intent, 0);
-
-
         Resources res = getResources();
         myListView = (ListView) findViewById(R.id.DBListView);
         progressTextView = (TextView) findViewById(R.id.progressTextView);
-        //    timeTextView = (TextView) findViewById(R.id.timeTextView);
+    //    timeTextView = (TextView) findViewById(R.id.timeTextView);
         thisContext = this;
+
         progressTextView.setText("");
         Button btn = (Button) findViewById(R.id.getDataButton);
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v) {
-                //Move to GetData
                 //traverse through array to save previous data;
-               // i = 0;
-               // if(j < 9) {
-               //     j++;
-                //} else {
-                //    j = 0;
-                //}
+                i = 0;
+                if(j < 9) {
+                    j++;
+                } else {
+                    j = 0;
+                }
+
                 //execute getting data from database
                 GetData retrieveData = new GetData();
                 retrieveData.execute("");
-                //////////////////////////////////////////////////////////////////////////////////////
-                //Alarm SET and repeats every 1min
-                AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                int interval = 1000 * 60;
-                manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+interval,
-                        interval, alarmIntent);
-                Toast.makeText(database_test.this,"ALARM SET",Toast.LENGTH_SHORT).show();
-                ///////////////////////////////////////////////////////////////////////////////////////
             }
         });
-
+        //Code in progress*********************
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int r, long d) {
@@ -102,11 +82,15 @@ public class database_test extends AppCompatActivity {
                 Intent moreInfoActivity = new Intent(getApplicationContext(), moreInfoActivity.class);
                 moreInfoActivity.putExtra("com.example.smarthomev2.ITEM_INDEX", r);
                 startActivity(moreInfoActivity);
+
             }
         });
+
+        //**************************************
     }
 
-    static class GetData extends AsyncTask<String, String, String> {
+    class GetData extends AsyncTask<String, String, String> {
+
         String msg = "";
         String timeText;
         //JDBC driver name and database URL
@@ -128,12 +112,6 @@ public class database_test extends AppCompatActivity {
             Statement stmt = null;
 
             try {
-                i = 0;
-                if( j < 9) {
-                    j++;
-                } else {
-                    j = 0;
-                }
                 Class.forName(JDBC_DRIVER); //
                 conn = DriverManager.getConnection(DB_URL, DB_strings.USERNAME, DB_strings.PASSWORD);
 
@@ -147,6 +125,7 @@ public class database_test extends AppCompatActivity {
 
                     double powerFactor = rs.getDouble("powerfactor");
                     powerFactorArray[i][j] = rs.getDouble("powerfactor");
+
                     //double pricing = rs.getFloat("price");
                     //int power = rs.getInt("power");
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--  sdgsgrqwrc -->
+<!--  sdgsgrqwrc -->
 
     <TextView
         android:id="@+id/appName"
@@ -39,37 +39,20 @@
         android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userPassword"
+        android:text="Sign In"
+        android:layout_below ="@+id/userPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
-        android:onClick="signInAttempt"
-        android:text="Sign In" />
+        android:layout_margin="30sp"
+
+        />
 
     <Button
         android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/signIn"
-        android:layout_alignStart="@+id/signIn"
-        android:layout_below="@+id/sampleMessage"
-        android:layout_marginTop="32dp"
-        android:text="Sign Up" />
-
-    <TextView
-        android:id="@+id/sampleMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signIn"
+        android:text="Sign Up"
+        android:layout_below ="@+id/signIn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
-        android:text="" />
-
-    <ProgressBar
-         android:id="@+id/progressBar"
-         style="?android:attr/progressBarStyle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/signUp"
-         android:layout_centerHorizontal="true"
-         android:layout_marginTop="14dp" />
+        android:layout_margin="120sp"
+        />
 </RelativeLayout>
