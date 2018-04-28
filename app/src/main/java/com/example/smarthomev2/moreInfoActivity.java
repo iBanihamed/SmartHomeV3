@@ -1,5 +1,6 @@
 package com.example.smarthomev2;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import static com.example.smarthomev2.database_test.powerFactorArray;
 
 public class moreInfoActivity extends AppCompatActivity {
     //Switch switcher= (Switch) findViewById(R.id.switchA);
-    static boolean on;
+    static boolean switch_state[] = new boolean[20];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,12 @@ public class moreInfoActivity extends AppCompatActivity {
         Double yi;
         DataPoint[] values = new DataPoint[9];
 
-        Switch switcher= (Switch) findViewById(R.id.switchA);
-
+        final Switch switcher= (Switch) findViewById(R.id.switchA);
+        final SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        switch_state[pos] = preferences.getBoolean(Integer.toString(pos), true);
+        GetData getData = new GetData();
+        getData.execute("");
+        switcher.setChecked(switch_state[pos]);
         while(j <= 9) {
             xi = i;
             if(powerFactorArray[pos][j] != null){
@@ -65,15 +70,21 @@ public class moreInfoActivity extends AppCompatActivity {
 
         switcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = preferences.edit();
 
                 SendData sendData = new SendData();
                 if(isChecked) {
-                    on = true;
+                    switch_state[pos] = true;
+                    editor.putBoolean(Integer.toString(pos), true);
+                    editor.commit();
                     sendData.execute("");
                 } else {
-                    on = false;
+                    switch_state[pos] = false;
+                    editor.putBoolean(Integer.toString(pos), false);
+                    editor.commit();
                     sendData.execute("");
                 }
+
             }
         });
     }
@@ -104,7 +115,7 @@ public class moreInfoActivity extends AppCompatActivity {
                 conn = DriverManager.getConnection(DB_URL, DB_strings.USERNAME, DB_strings.PASSWORD);
 
                 stmt = conn.createStatement();
-                String sql = "UPDATE devicedata SET OnOff =" + on + " WHERE ID =" +(pos + 1)+";"; //added 1 to position to align with database ID
+                String sql = "UPDATE devicedata SET OnOff =" + switch_state[pos] + " WHERE ID =" +(pos + 1)+";"; //added 1 to position to align with database ID
                 stmt.executeUpdate(sql);
 
                 //Time timeStamp = rs.getTime("time");
@@ -145,4 +156,76 @@ public class moreInfoActivity extends AppCompatActivity {
         }
     }
 
+    static class GetData extends AsyncTask<String, String, String> {
+        String msg = "";
+        String timeText;
+        //JDBC driver name and database URL
+        static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+        //Example
+        static final String DB_URL = "jdbc:mysql://" +
+                DB_strings.DATABASE_URL + "/" +
+                DB_strings.DATABASE_NAME;
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            Connection conn = null;
+            Statement stmt = null;
+
+            try {
+
+                Class.forName(JDBC_DRIVER); //
+                conn = DriverManager.getConnection(DB_URL, DB_strings.USERNAME, DB_strings.PASSWORD);
+
+                stmt = conn.createStatement();
+                String sql = "SELECT OnOff FROM devicedata WHERE ID =" + pos + ";";
+                ResultSet rs = stmt.executeQuery(sql);
+                Integer state = rs.getInt("OnOff");
+
+                if (state == 1)
+                    switch_state[pos] = true;
+                else
+                    switch_state[pos] = false;
+
+                //Time timeStamp = rs.getTime("time");
+                msg = "Process complete";
+                //timeText = timeStamp;
+                //Toast.makeText(getBaseContext(), "Process complete", Toast.LENGTH_SHORT).show();
+                rs.close();
+                stmt.close();
+                conn.close();
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown for JDBC.";
+                connError.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                msg = "A class not found exception was thrown";
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String msg) {
+
+        }
+    }
 }
