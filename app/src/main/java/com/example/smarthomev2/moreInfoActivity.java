@@ -182,9 +182,9 @@ public class moreInfoActivity extends AppCompatActivity {
                 conn = DriverManager.getConnection(DB_URL, DB_strings.USERNAME, DB_strings.PASSWORD);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT OnOff FROM devicedata WHERE ID =" + pos + ";";
+                String sql = "SELECT onOff FROM devicedata WHERE ID =" + pos + ";";
                 ResultSet rs = stmt.executeQuery(sql);
-                Integer state = rs.getInt("OnOff");
+                Integer state = rs.getInt("onOff");
 
                 if (state == 1)
                     switch_state[pos] = true;

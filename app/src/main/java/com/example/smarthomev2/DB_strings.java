@@ -9,6 +9,6 @@ public class DB_strings {
     static final String DATABASE_URL = "172.20.10.2:3306"; //Need to change numbers
     static final String DATABASE_NAME = "smarthome";
     static final String USERNAME = "CSUN";
-    static final String PASSWORD = "smarthome";
+    static final String PASSWORD = "smartdome";
 
 }
