@@ -1,8 +1,13 @@
 package com.example.smarthomev2;
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Switch;
+import android.widget.ToggleButton;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -18,7 +23,7 @@ public class moreInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_info);
-
+        Switch tg;
         int position = pos;
         //going to have to use queue to implement
         double[] pfArray = new double[0];
@@ -45,6 +50,23 @@ public class moreInfoActivity extends AppCompatActivity {
         graph.addSeries(series);
 
 
+        final SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean tgpref = preferences.getBoolean(Integer.toString(pos), true);  //default is true
+
+        tg = (Switch) findViewById(R.id.toggle1);
+        tg.setChecked(pos==1);
+
+
+        tg.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(Integer.toString(pos), tg.isChecked()); // value to store
+                editor.commit();
+            }
+        });
        /* LineGraphSeries<DataPoint> series  = new LineGraphSeries<>(new DataPoint[] {
             new DataPoint(0,powerFactorArray[pos][1]),
             new DataPoint(1, powerFactorArray[pos][2]), //cant graph the rest of the values because they null button needs to be clicked on more
