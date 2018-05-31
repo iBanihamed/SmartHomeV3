@@ -42,11 +42,11 @@ import static com.example.smarthomev2.database_test.GetData.DB_URL;
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_login);
          
-         login = (Button) findViewById(R.id.signIn);
-         signup = (Button) findViewById(R.id.signUp);
-         username = (EditText) findViewById(R.id.userUsername);
-         password = (EditText) findViewById(R.id.userPassword);
-         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+         login = findViewById(R.id.signIn);
+         signup = findViewById(R.id.signUp);
+         username = findViewById(R.id.userUsername);
+         password = findViewById(R.id.userPassword);
+         progressBar = findViewById(R.id.progressBar);
          
          progressBar.setVisibility(View.GONE);
 

@@ -1,4 +1,7 @@
 package com.example.smarthomev2;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -13,19 +16,19 @@ import android.widget.Button;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    private PendingIntent alarmIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Create custom header
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         // Create bottom tab layout
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         //Button to go to DB list
-        Button startButton = (Button) findViewById(R.id.getStarted);
+        Button startButton = findViewById(R.id.getStarted);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +61,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                manager.cancel(alarmIntent);
+                Toast.makeText(getBaseContext(), "Alarm Canceled", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 
 
     @Override

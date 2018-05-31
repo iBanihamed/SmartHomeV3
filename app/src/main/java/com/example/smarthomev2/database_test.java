@@ -64,14 +64,14 @@ public class database_test extends AppCompatActivity {
 
 
         Resources res = getResources();
-        myListView = (ListView) findViewById(R.id.DBListView);
-        progressTextView = (TextView) findViewById(R.id.progressTextView);
+        myListView = findViewById(R.id.DBListView);
+        progressTextView = findViewById(R.id.progressTextView);
 
         //    timeTextView = (TextView) findViewById(R.id.timeTextView);
         thisContext = this;
         progressTextView.setText("");
 
-        Button btn = (Button) findViewById(R.id.getDataButton);
+        Button btn = findViewById(R.id.getDataButton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v) {
@@ -162,7 +162,7 @@ public class database_test extends AppCompatActivity {
                     i++;
                 }
                 //Time timeStamp = rs.getTime("time");
-                msg = "Process complete";
+                //msg = "Process complete";
                 //timeText = timeStamp;
                 //Toast.makeText(getBaseContext(), "Process complete", Toast.LENGTH_SHORT).show();
                 rs.close();

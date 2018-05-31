@@ -53,8 +53,8 @@ public class itemAdapterDB extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = mInflator.inflate(R.layout.item_layout, null);
-        TextView devicesTextView = (TextView) v.findViewById(R.id.devicesTextView);
-        TextView pfTextView = (TextView) v.findViewById(R.id.PFTextView);
+        TextView devicesTextView = v.findViewById(R.id.devicesTextView);
+        TextView pfTextView = v.findViewById(R.id.PFTextView);
         // TextView costTextView = (TextView) v.findViewById(R.id.costTextView);
 
         devicesTextView.setText(device.get(position).toString());

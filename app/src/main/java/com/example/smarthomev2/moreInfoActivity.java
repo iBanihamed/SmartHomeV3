@@ -37,7 +37,7 @@ public class moreInfoActivity extends AppCompatActivity {
         Double yi;
         DataPoint[] values = new DataPoint[9];
 
-        final Switch switcher= (Switch) findViewById(R.id.switchA);
+        final Switch switcher= findViewById(R.id.switchA);
         final SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         switch_state[pos] = preferences.getBoolean(Integer.toString(pos), true);
         GetData getData = new GetData();
@@ -55,7 +55,7 @@ public class moreInfoActivity extends AppCompatActivity {
             j++;
         }
 
-        GraphView graph = (GraphView) findViewById(R.id.powerGraph);
+        GraphView graph = findViewById(R.id.powerGraph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(values);
         graph.setTitle("Power Factor Over Last 8 Hours");
         graph.getGridLabelRenderer().setHorizontalAxisTitle("Time");
@@ -186,10 +186,7 @@ public class moreInfoActivity extends AppCompatActivity {
                 ResultSet rs = stmt.executeQuery(sql);
                 Integer state = rs.getInt("onOff");
 
-                if (state == 1)
-                    switch_state[pos] = true;
-                else
-                    switch_state[pos] = false;
+                switch_state[pos] = state == 1;
 
                 //Time timeStamp = rs.getTime("time");
                 msg = "Process complete";
