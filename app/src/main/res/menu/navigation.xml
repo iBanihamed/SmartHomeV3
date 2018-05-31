@@ -6,14 +6,20 @@
         android:icon="@drawable/ic_action_home"
         android:title="@string/title_home" />
 
+
+
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_action_settings"
         android:title="Settings" />
 
+
+
     <item
         android:id="@+id/navigation_charts"
         android:icon="@drawable/ic_action_chart"
         android:title="Charts" />
+
+
 
 </menu>

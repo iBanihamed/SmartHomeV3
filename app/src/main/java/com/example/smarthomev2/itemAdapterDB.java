@@ -62,43 +62,42 @@ public class itemAdapterDB extends BaseAdapter {
 
         //stays comented out until we can query data from database
         setRowColor(v, powerFactor.get(position));
-
         return v;
     }
 
     private void setRowColor(View v, Double powerFactor) {
         int level = getLevel(powerFactor);
         switch (level) {
-            case 1: v.setBackgroundResource(R.color.colorDarkGreen);
+            case 1:
+                v.setBackgroundResource(R.color.colorLimeGreen);
                 break;
-            case 2: v.setBackgroundResource(R.color.colorLimeGreen);
+            case 2:
+                v.setBackgroundResource(R.color.colorYellow);
                 break;
-            case 3: v.setBackgroundResource(R.color.colorYellow);
+            case 3:
+                v.setBackgroundResource(R.color.colorOrange);
                 break;
-            case 4: v.setBackgroundResource(R.color.colorOrange);
+            case 4:
+                v.setBackgroundResource(R.color.colorRed);
                 break;
-            case 5: v.setBackgroundResource(R.color.colorRed);
-                break;
-            // case 12: v.setBackgroundColor(Color.rgb(0,100,0));
-            //   break;
-            //white default
-            default: v.setBackgroundResource(R.color.colorPrimary);
+            default:
+                v.setBackgroundResource(R.color.colorPrimary);
                 break;
         }
     }
 
     private int getLevel(Double pf) {
         int level;
-        if (pf < 0) {   //really bad pf
-            level = 1;
-        } else if (pf < 0.5) {    //bad pf
-            level = 2;
-        } else if (pf < 0.7) { //decent pf
-            level = 3;
-        } else if (pf < 0.9) {  //good pf
+        if (pf < 0.3) {   //really bad pf
             level = 4;
+        } else if (pf < 0.5) {    //bad pf
+            level = 3;
+        } else if (pf < 0.7) { //decent pf
+            level = 2;
+        } else if (pf < 0.9) {  //good pf
+            level = 1;
         } else {  //great pf
-            level = 5;
+            level = 1;
         }
         return level;
     }

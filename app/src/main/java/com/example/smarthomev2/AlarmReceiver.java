@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
-import static com.example.smarthomev2.database_test.GetData;
 
 /**
  * Created by Andrew on 3/4/2018.
